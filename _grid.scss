@@ -1,0 +1,57 @@
+﻿$grid-max-size: 1200px; // maximum size of the grid's container
+$grid-cols: 12;
+$grid-col-size: (100 / $grid-cols);
+$grid-pad: 1em;
+
+.container {
+  max-width: $grid-max-size;
+  margin: auto;
+  padding: $grid-pad;
+
+  &--reset {
+    padding: 0;
+  }
+
+  [class*="grid-"] {
+    float: left;
+    padding: 0 $grid-pad*2 $grid-pad 0;
+
+    &.last {
+      padding-right: 0;
+    }
+  }
+
+  .grid__content {
+    border: 1px $primary-color-outline solid;
+    padding: $grid-pad;
+  }
+
+  .grid__content input[type="text"] {
+      width: 100%;
+  }
+
+  .grid__title {
+    padding-bottom: 0.5em;
+    font-weight: bold;
+  }
+
+  @for $i from 1 through $grid-cols {
+    .grid-#{$i} {
+      width: 0% + ($grid-col-size * $i);
+    }
+  }
+
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@media handheld, only screen and (max-width: 767px) {
+
+    .container [class*='grid-'] {
+        width: 100%;
+        padding-right: 0;
+    }
+}
